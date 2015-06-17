@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,700,400">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1 maximum-scale=1.0, minimum-scale=1.0" />
+    <title>GitCard</title>
+  </head>
+  <body ng-app="bitcoinApp" ng-controller="MainController" layout="column" layout-align="top center">
+    <md-toolbar class="md-hue-3">
+      <div class="md-toolbar-tools">
+	      <span class="md-flex">Gitcard</span>
+      </div>
+    </md-toolbar>
+    <md-content layout="column" class="md-padding" layout-align="center center" >
+      <div class="app-content" layout="column" layout-align="center center">
+	      <p class="md-padding">Enter your Github username below and click the button to get your gitcard.</p>
+	      <form class="md-padding" layout="column" layout-align="center center">
+		      <md-input-container>
+		        <label>Github username...</label>
+			<input type="text" ng-model="username">
+		      </md-input-container>
+		      <md-button class="md-raised md-warn md-hue-3" ng-click="getGitInfo()">FETCH YOUR CARD</md-button>
+	      </form>
+	      <md-whiteframe class="md-whiteframe-z3" ng-show="loaded">
+	          <div class="md-toolbar-tools">
+			  <span><img ng-src="{{user.avatar_url}}"  height="80" width="80" class="md-card-image" alt="{{user.login}}">
+		</span>  
+		<span flex></span>
+		<span><{{user.login}}></span>
+		  </div>
+		
+		<p class="md-padding">Followers: {{ user.followers }} - Following: {{ user.following }}<br>
+		Repos: {{ user.public_repos }}</p>
+		<div>
+			<p ng-hide="reposFound">No repos!</p>
+			<div ng-show="reposFound">
+				<section layout="column" layout-sm="column" layout-align="start start" class="md-padding">
+				<div class="label">Repos List:</div>
+				<md-list layout="row"> 
+				  <md-list-item  ng-repeat="repo in repos">
+				  <md-button class="md-raised md-warn md-hue-3" ng-href="{{repo.html_url}}" target="_blank">{{repo.name}}</md-button>
+				  </md-list-item>
+				</md-list>
+				
+			</section>
+			</div>
+		</div>
+		</md-whiteframe>
+      </div>
+    </md-content>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-material.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/MainController.js"></script>
+  </body>
+</html>
