@@ -13,7 +13,7 @@
 	      <span class="md-flex">Gitcard</span>
       </div>
     </md-toolbar>
-    <md-content layout="column" class="md-padding" layout-align="center center" >
+    <md-content layout="column" layout-padding layout-align="center center" >
       <div class="app-content" layout="column" layout-align="center center">
 	      <p class="md-padding">Enter your Github username below and click the button to get your gitcard.</p>
 	      <form class="md-padding" layout="column" layout-align="center center">
@@ -23,28 +23,26 @@
 		      </md-input-container>
 		      <md-button class="md-raised md-warn md-hue-3" ng-click="getGitInfo()">FETCH YOUR CARD</md-button>
 	      </form>
-	      <md-whiteframe class="md-whiteframe-z3" ng-show="loaded">
-	          <div class="md-toolbar-tools">
-			  <span><img ng-src="{{user.avatar_url}}"  height="80" width="80" class="md-card-image" alt="{{user.login}}">
+	      <md-whiteframe  class="md-whiteframe-z2" ng-show="loaded">
+	          <div layout="row" layout-align="space-between center" layout-padding>
+			  <span><img ng-src="{{user.avatar_url}}" class="md-avatar" height="80" width="80" class="md-card-image" alt="{{user.login}}">
 		</span>  
-		<span flex></span>
 		<span><{{user.login}}></span>
 		  </div>
 		
-		<p class="md-padding">Followers: {{ user.followers }} - Following: {{ user.following }}<br>
+		<p class="md-padding">Followers: {{ user.followers }}  Following: {{ user.following }}<br>
 		Repos: {{ user.public_repos }}</p>
 		<div>
 			<p ng-hide="reposFound">No repos!</p>
 			<div ng-show="reposFound">
-				<section layout="column" layout-sm="column" layout-align="start start" class="md-padding">
-				<div class="label">Repos List:</div>
 				<md-list layout="row"> 
+				
+				<md-subheader class="md-no-sticky">Repos List:</md-subheader>
 				  <md-list-item  ng-repeat="repo in repos">
 				  <md-button class="md-raised md-warn md-hue-3" ng-href="{{repo.html_url}}" target="_blank">{{repo.name}}</md-button>
 				  </md-list-item>
 				</md-list>
 				
-			</section>
 			</div>
 		</div>
 		</md-whiteframe>
